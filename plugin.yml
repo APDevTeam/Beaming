@@ -1,0 +1,11 @@
+main: net.TylerS1066.Beaming.Main
+name: Beaming
+version: 1.0
+author: TylerS1066
+description: A Beaming Plugin - a companion to Movecraft
+commands:
+  beam:
+    description: Beams you up to your airship (only works if you have a Crew Sign)
+    usage: /beam
+    permission: beaming.beam
+    permission-message: You don't have the beaming.beam permission.
