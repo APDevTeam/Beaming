@@ -1,8 +1,8 @@
 # Beaming
-Beaming - a Bukkit plugin as a companion to Movecraft
+Beaming - a Bukkit plugin companion to Movecraft
 
-Commands:
+###Commands:
 /beam - Beams you to your airship, requires that you have a crew sign
 
-Permissions:
+###Permissions:
 /beam - beaming.beam
