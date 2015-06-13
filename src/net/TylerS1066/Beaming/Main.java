@@ -13,7 +13,6 @@ public class Main extends JavaPlugin
     {
   		
     }
-   
     @Override
     public void onDisable()
     {
@@ -31,10 +30,14 @@ public class Main extends JavaPlugin
             else
             {
                 Player player = (Player) sender;
+                if(args[0] == "scotty")
+                {
+                	player.chat("Beam me up scotty!");
+                }
                 player.setHealth(0);
-                //force player to respawn
-                sender.sendMessage("[Beaming] You beamed to your ship!");
-                String message = "[Beaming]" + player.getDisplayName() + " beamed to their ship";
+                player.spigot().respawn();
+                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
+                String message = "§1[§eBeaming§1]§c" + player.getDisplayName() + "§r§c beamed to their ship";
                 Bukkit.broadcastMessage(message);
             }
         	return true;
