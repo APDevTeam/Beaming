@@ -6,6 +6,6 @@ description: A Beaming Plugin - a companion to Movecraft
 commands:
   beam:
     description: Beams you up to your airship (only works if you have a Crew Sign)
-    usage: /beam
+    usage: /beam [scotty]
     permission: beaming.beam
     permission-message: You don't have the beaming.beam permission.
