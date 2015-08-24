@@ -30,9 +30,10 @@ public class Main extends JavaPlugin
             else
             {
                 Player player = (Player) sender;
-                if(args[0] == "scotty")
+                if(args.length == 1)
                 {
-                	player.chat("Beam me up scotty!");
+                	if(args[0].equalsIgnoreCase("scotty"))
+                		player.chat("Beam me up scotty!");
                 }
                 player.setHealth(0);
                 player.spigot().respawn();
