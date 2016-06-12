@@ -39,8 +39,7 @@ public class Main extends JavaPlugin {
 				player.spigot().respawn();
 				String message = "§1[§eBeaming§1]§c" + player.getDisplayName() + "§r§c beamed to their ship";
 				Bukkit.broadcastMessage(message);
-				player.getWorld().setGameRuleValue("showDeathMessages" , "true");
-			}
+				player.getWorld().setGameRuleValue("showDeathMessages" , "true");		}
 			return true;
 		}
 		return false;
