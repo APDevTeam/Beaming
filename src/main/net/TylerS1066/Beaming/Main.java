@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -55,7 +56,7 @@ public class Main extends JavaPlugin implements Listener{
     public void onEntityDeath(PlayerDeathEvent e){
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if(p.hasMetadata("beaming") && ((FixedMetadataValue) p.getMetadata("beaming")).asBoolean() ){
+            if(p.hasMetadata("beaming") && p.getMetadata("beaming").get(0).asBoolean() ){
                 e.setDeathMessage("§1[§eBeaming§1]§c" + p.getDisplayName() + "§r§c beamed to their ship");
                 p.setMetadata("beaming", new FixedMetadataValue(this,false));
             }
