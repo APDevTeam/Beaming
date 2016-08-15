@@ -37,15 +37,9 @@ public class Main extends JavaPlugin implements Listener{
                         this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
                 } else {
                     sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
-                    String message = "§1[§eBeaming§1]§c" + player.getDisplayName() + "§r§c beamed to their ship";
-                    Bukkit.broadcastMessage(message);
                 }
-                //player.getWorld().setGameRuleValue("showDeathMessages" , "false");
                 player.setHealth(0);
                 player.spigot().respawn();
-                //String message = "§1[§eBeaming§1]§c" + player.getDisplayName() + "§r§c beamed to their ship";
-                //Bukkit.broadcastMessage(message);
-                //player.getWorld().setGameRuleValue("showDeathMessages" , "true");		
             }
             return true;
         }
