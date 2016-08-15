@@ -32,12 +32,11 @@ public class Main extends JavaPlugin implements Listener{
             } else {
                 Player player = (Player) sender;
                 player.setMetadata("beaming", new FixedMetadataValue(this,true));
-                if (args.length == 1) {
-                    if (args[0].equalsIgnoreCase("scotty"))
-                        this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
-                } else {
-                    sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
+                player.leaveVehicle();
+                if (args.length >= 1 && args[0].equalsIgnoreCase("scotty")) {
+                    this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
                 }
+                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
                 player.setHealth(0);
                 player.spigot().respawn();
             }
