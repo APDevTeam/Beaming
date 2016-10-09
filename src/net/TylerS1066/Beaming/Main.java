@@ -36,7 +36,7 @@ public class Main extends JavaPlugin implements Listener{
                 if (args.length >= 1 && args[0].equalsIgnoreCase("scotty")) {
                     this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
                 }
-                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
+                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to your ship!");
                 player.setHealth(0);
                 player.spigot().respawn();
             }
