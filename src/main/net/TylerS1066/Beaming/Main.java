@@ -36,7 +36,7 @@ public class Main extends JavaPlugin implements Listener{
                 if (args.length >= 1 && args[0].equalsIgnoreCase("scotty")) {
                     this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
                 }
-                sender.sendMessage("Â§1[Â§eBeamingÂ§1] Â§cYou beamed to you ship!");
+                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to your ship!");
                 player.setHealth(0);
                 player.spigot().respawn();
             }
@@ -50,7 +50,7 @@ public class Main extends JavaPlugin implements Listener{
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             if(p.hasMetadata("beaming") && p.getMetadata("beaming").get(0).asBoolean() ){
-                e.setDeathMessage("Â§1[Â§eBeamingÂ§1]Â§c" + p.getDisplayName() + "Â§rÂ§c beamed to their ship");
+                e.setDeathMessage("§1[§eBeaming§1]§c" + p.getDisplayName() + "§r§c beamed to their ship");
                 p.setMetadata("beaming", new FixedMetadataValue(this,false));
             }
         }
