@@ -1,6 +1,6 @@
 main: net.TylerS1066.Beaming.Main
 name: Beaming
-version: 1.04
+version: 1.05
 author: TylerS1066
 description: A Beaming Plugin - a companion to Movecraft
 commands:
