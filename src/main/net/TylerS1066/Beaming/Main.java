@@ -11,6 +11,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.ChatColor;
 
 public class Main extends JavaPlugin implements Listener{
 
@@ -36,7 +37,8 @@ public class Main extends JavaPlugin implements Listener{
                 if (args.length >= 1 && args[0].equalsIgnoreCase("scotty")) {
                     this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
                 }
-                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to your ship!");
+                sender.sendMessage(ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "]" + ChatColor.RED + "You beamed to your ship!");
+                		
                 player.setHealth(0);
                 player.spigot().respawn();
             }
@@ -50,7 +52,7 @@ public class Main extends JavaPlugin implements Listener{
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             if(p.hasMetadata("beaming") && p.getMetadata("beaming").get(0).asBoolean() ){
-                e.setDeathMessage("§1[§eBeaming§1]§c" + p.getDisplayName() + "§r§c beamed to their ship");
+                e.setDeathMessage(ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "]"+ ChatColor.RED + p.getDisplayName() + ChatColor.RED + " beamed to their ship");
                 p.setMetadata("beaming", new FixedMetadataValue(this,false));
             }
         }
