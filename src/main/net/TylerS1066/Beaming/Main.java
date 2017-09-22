@@ -35,7 +35,7 @@ public class Main extends JavaPlugin implements Listener{
                 player.setMetadata("beaming", new FixedMetadataValue(this,true));
                 player.leaveVehicle();
                 if (args.length >= 1 && args[0].equalsIgnoreCase("scotty")) {
-                    this.getServer().broadcastMessage(player.getDisplayName() + ": 'Beam me up scotty!'");
+                    player.chat("Beam me up scotty!");
                 }
                 sender.sendMessage(ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "]" + ChatColor.RED + "You beamed to your ship!");
                 		
