@@ -1,11 +1,14 @@
-main: net.TylerS1066.Beaming.Main
-name: Beaming
-version: 1.1
-author: TylerS1066
-description: A Beaming Plugin - a companion to Movecraft
+name: BeamingPlugin
+version: ${project.version}
+main: net.tylers1066.beaming.BeamingPlugin
+api-version: 1.16
+prefix: Beaming
+authors: [TylerS1066]
+description: Beaming Plugin - a companion to movecraft
+website: https://github.com/APDevTeam/Beaming
 commands:
   beam:
-    description: Beams you up to your airship (only works if you have a Crew Sign)
-    usage: /beam [scotty]
+    description: Beams you up to your respawn point
+    usage: /beam
     permission: beaming.beam
     permission-message: You don't have the beaming.beam permission.
