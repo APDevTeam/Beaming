@@ -1,0 +1,24 @@
+EnableRespawn: false
+
+EnableRespawnStrength: true
+EnableRespawnSpeed: true
+EnableRespawnResistance: true
+
+RespawnMainHand:
+  Use: true
+  Item: STICK
+  Name: "Marine's Repelling Twig"
+  Lore:
+    - "Marine's Repelling Twig"
+  Enchants:
+    KNOCKBACK: 3
+    DAMAGE_ALL: 5
+
+RespawnOffHand:
+  Use: false
+  Item: SHIELD
+  Name: "Marine's Defense Shield"
+  Lore:
+    - "Marine's Defense Shield"
+  Enchants:
+    DURABILITY: 3
