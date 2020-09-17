@@ -21,9 +21,11 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Stage jar
-      run: mkdir staging && cp target/*.jar staging
+      run: mkdir staging && cp target/Beaming*.jar staging
+    - name: Rename jar
+      run: mv staging/Beaming*.jar staging/Beaming*-$GITHUB_SHA.jar
     - name: Upload jar
       uses: actions/upload-artifact@v2
       with:
-        name: Package
+        name: Dev-$GITHUB_SHA
         path: staging
