@@ -23,9 +23,9 @@ jobs:
     - name: Stage jar
       run: mkdir staging && cp target/Beaming*.jar staging
     - name: Rename jar
-      run: for f in *.jar; do echo mv "$f" "${f%.jar}-$GITHUB_SHA.jar"; done
+      run: mv Beaming*.jar Beaming-$GITHUB_SHA.jar
     - name: Upload jar
       uses: actions/upload-artifact@v2
       with:
-        name: Dev-$GITHUB_SHA
-        path: staging
+        name: Beaming_Dev-Build
+        path: staging/Beaming-$GITHUB_SHA.jar
