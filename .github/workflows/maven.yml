@@ -14,14 +14,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    
-    # Download and build Movecraft
-    - uses: actions/checkout@v2
-      with:
-        repository: 'APDevTeam/Movecraft'
-        path: Movecraft 
-    - run: cd Movecraft & mvn clean install
-    
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
@@ -29,8 +21,17 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     
+    # Download and build Movecraft
+    - uses: actions/checkout@v2
+      with:
+        repository: 'APDevTeam/Movecraft'
+        path: Movecraft 
+    - run: cd Movecraft & mvn clean install
+
+    # Build MCC
     - name: Build with Maven
-      run: mvn -B package --file ~/MC-Combat/pom.xml
+      run: mvn -B package --file MC-Combat/pom.xml
+
     - name: Stage jar
       run: mkdir staging && cp target/Beaming*.jar staging
     - name: Rename jar
