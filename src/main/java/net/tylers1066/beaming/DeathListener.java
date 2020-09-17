@@ -35,13 +35,9 @@ public class DeathListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    BeamingPlugin.getInstance().getLogger().info("Offhand: " + Config.RespawnOffHand.toString());
                     p.getInventory().setItemInOffHand(Config.RespawnOffHand);
                 }
             }.runTaskLater(BeamingPlugin.getInstance(), 5L);
-        }
-        else {
-            BeamingPlugin.getInstance().getLogger().info("Not offhand?");
         }
         if(Config.EnableRespawnStrength) {
             new BukkitRunnable() {
