@@ -23,7 +23,7 @@ jobs:
     - name: Stage jar
       run: mkdir staging && cp target/Beaming*.jar staging
     - name: Rename jar
-      run: mv Beaming*.jar Beaming-$GITHUB_SHA.jar
+      run: mv staging/Beaming*.jar staging/Beaming-$GITHUB_SHA.jar
     - name: Upload jar
       uses: actions/upload-artifact@v2
       with:
