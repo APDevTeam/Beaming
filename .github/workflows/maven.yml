@@ -16,14 +16,12 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-m2
         restore-keys: ${{ runner.os }}-m2
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Stage jar
-      run: mkdir staging && cp target/Beaming*.jar staging
-    - name: Rename jar
-      run: mv staging/Beaming*.jar staging/Beaming_$GITHUB_SHA.jar
+      run: mkdir staging && cp target/Beaming*.jar staging && mv staging/Beaming*.jar staging/Beaming_$GITHUB_SHA.jar
     - name: Upload jar
       uses: actions/upload-artifact@v2
       with:
