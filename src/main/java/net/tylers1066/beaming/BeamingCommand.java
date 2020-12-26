@@ -37,7 +37,6 @@ public class BeamingCommand implements CommandExecutor {
 
         player.setHealth(0);
         player.spigot().respawn();
-
         return true;
     }
 }

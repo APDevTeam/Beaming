@@ -6,7 +6,7 @@
 
     <groupId>net.TylerS1066.Beaming</groupId>
     <artifactId>BeamingPlugin</artifactId>
-    <version>1.3.10</version>
+    <version>1.4.0</version>
     <packaging>jar</packaging>
 
     <name>BeamingPlugin</name>
@@ -19,6 +19,7 @@
     <url>https://github.com/APDevTeam/Beaming</url>
 
     <build>
+        <finalName>Beaming</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

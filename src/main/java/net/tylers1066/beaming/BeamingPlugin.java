@@ -29,8 +29,14 @@ public class BeamingPlugin extends JavaPlugin implements Listener{
             try {
                 Config.EnableRespawn = true;
                 Config.EnableRespawnStrength = getConfig().getBoolean("EnableRespawnStrength", false);
+                Config.StrengthDuration = 20 * getConfig().getInt("StrengthDuration", 30);
+                Config.StrengthAmplitude = getConfig().getInt("StrengthAmplitude", 1);
                 Config.EnableRespawnSpeed = getConfig().getBoolean("EnableRespawnSpeed", false);
+                Config.SpeedDuration = 20 * getConfig().getInt("SpeedDuration", 30);
+                Config.SpeedAmplitude = getConfig().getInt("SpeedAmplitude", 1);
                 Config.EnableRespawnResistance = getConfig().getBoolean("EnableRespawnResistance", false);
+                Config.ResistanceDuration = 20 * getConfig().getInt("ResistanceDuration", 30);
+                Config.ResistanceAmplitude = getConfig().getInt("ResistanceAmplitude", 5);
 
                 if (getConfig().contains("RespawnMainHand") && getConfig().getBoolean("RespawnMainHand.Use")) {
                     Config.EnableRespawnMainHand = true;
@@ -74,11 +80,11 @@ public class BeamingPlugin extends JavaPlugin implements Listener{
                 throw e;
             }
             getLogger().info("Loaded config.");
+
+            getServer().getPluginManager().registerEvents(new DeathListener(), this);
         }
 
         this.getCommand("beam").setExecutor(new BeamingCommand());
-
-        getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
     @Override

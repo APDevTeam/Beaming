@@ -43,7 +43,7 @@ public class DeathListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600, 1));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Config.StrengthDuration, Config.StrengthAmplitude));
                 }
             }.runTaskLater(BeamingPlugin.getInstance(), 10L);
         }
@@ -51,7 +51,7 @@ public class DeathListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 600, 1));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Config.SpeedDuration, Config.SpeedAmplitude));
                 }
             }.runTaskLater(BeamingPlugin.getInstance(), 10L);
         }
@@ -59,7 +59,7 @@ public class DeathListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 5));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Config.ResistanceDuration, Config.ResistanceAmplitude));
                 }
             }.runTaskLater(BeamingPlugin.getInstance(), 10L);
         }

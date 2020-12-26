@@ -1,24 +1,32 @@
-EnableRespawn: false
+EnableRespawn: false # Enable respawn buffs
 
-EnableRespawnStrength: true
-EnableRespawnSpeed: true
-EnableRespawnResistance: true
+EnableRespawnStrength: true # Enable strength effect on respawn
+StrengthDuration: 30 # Respawn strength duration
+StrengthAmplitude: 1 # Respawn strength level - 1 (Ex: 1 => Strength 2)
+EnableRespawnSpeed: true # Enable speed effect on respawn
+SpeedDuration: 30 # Respawn speed duration
+SpeedAmplitude: 1 # Respawn speed level - 1 (Ex: 1 => Speed 2)
+EnableRespawnResistance: true # Enable resistance effect on respawn
+ResistanceDuration: 30 # Respawn resistance duration
+ResistanceAmplitude: 5 # Respawn resistance level - 1 (Ex: 5 => Resistance 6)
 
+# Respawn with an item in your main hand
 RespawnMainHand:
-  Use: true
-  Item: STICK
-  Name: "Marine's Repelling Twig"
+  Use: true # Enable
+  Item: STICK # Item type
+  Name: "Marine's Repelling Twig" # Name of item
   Lore:
-    - "Marine's Repelling Twig"
-  Enchants:
+    - "Marine's Repelling Twig" # Lore of item
+  Enchants: # List of enchantments and their levels
     KNOCKBACK: 3
     DAMAGE_ALL: 5
 
+# Respawn with an item in your off hand
 RespawnOffHand:
-  Use: false
-  Item: SHIELD
-  Name: "Marine's Defense Shield"
+  Use: false # Enable
+  Item: SHIELD # Item type
+  Name: "Marine's Defense Shield" # Name of item
   Lore:
-    - "Marine's Defense Shield"
-  Enchants:
+    - "Marine's Defense Shield" # Lore of item
+  Enchants: # List of enchantments and their levels
     DURABILITY: 3
