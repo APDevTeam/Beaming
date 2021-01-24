@@ -56,12 +56,21 @@ public class DeathListener implements Listener {
             }.runTaskLater(BeamingPlugin.getInstance(), 10L);
         }
         if(Config.EnableRespawnResistance) {
+            p.setMetadata("BeamingRespawn", new FixedMetadataValue(BeamingPlugin.getInstance(), null));
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Config.ResistanceDuration, Config.ResistanceAmplitude));
                 }
             }.runTaskLater(BeamingPlugin.getInstance(), 10L);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    p.removeMetadata("BeamingRespawn", BeamingPlugin.getInstance());
+                }
+            }.runTaskLater(BeamingPlugin.getInstance(), Config.ResistanceDuration);
         }
     }
 }
