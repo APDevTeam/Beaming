@@ -1,3 +1,5 @@
+Locale: en # Localisation
+
 EnableRespawn: false # Enable respawn buffs
 
 EnableRespawnStrength: true # Enable strength effect on respawn

@@ -3,6 +3,8 @@ package net.tylers1066.beaming.config;
 import org.bukkit.inventory.ItemStack;
 
 public class Config {
+    public static String Locale = "en";
+
     public static boolean EnableRespawn = false;
 
     public static boolean EnableRespawnStrength = false;

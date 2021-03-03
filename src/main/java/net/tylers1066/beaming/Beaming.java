@@ -4,6 +4,7 @@ import net.tylers1066.beaming.commands.BeamCommand;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.listener.DeathListener;
 import net.tylers1066.beaming.listener.RespawnListener;
+import net.tylers1066.beaming.localisation.I18nSupport;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
 import org.bukkit.ChatColor;
 
+import java.io.File;
 import java.util.Map;
 
 public class Beaming extends JavaPlugin implements Listener{
@@ -28,6 +30,17 @@ public class Beaming extends JavaPlugin implements Listener{
         instance = this;
 
         saveDefaultConfig();
+
+        Config.Locale = getConfig().getString("Locale", "en");
+        String[] localisations = {"en"};
+        for (String s : localisations) {
+            if (!new File(getDataFolder()
+                    + "/localisation/beaminglang_" + s + ".properties").exists()) {
+                this.saveResource("localisation/beaminglang_" + s + ".properties", false);
+            }
+        }
+        I18nSupport.init();
+
 
         if(getConfig().getBoolean("EnableRespawn", false)) {
             try {
@@ -87,6 +100,8 @@ public class Beaming extends JavaPlugin implements Listener{
 
             getServer().getPluginManager().registerEvents(new RespawnListener(), this);
         }
+
+        // TODO: crew signs
 
         this.getCommand("beam").setExecutor(new BeamCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);

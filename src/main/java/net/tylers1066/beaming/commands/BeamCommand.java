@@ -1,6 +1,7 @@
 package net.tylers1066.beaming.commands;
 
 import net.tylers1066.beaming.Beaming;
+import net.tylers1066.beaming.localisation.I18nSupport;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,7 @@ public class BeamCommand implements CommandExecutor {
             return false;
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(Beaming.PREFIX + "Only players are allowed to use this command");
+            sender.sendMessage(Beaming.PREFIX + I18nSupport.getInternationalisedString("Players Only"));
             return false;
         }
 
@@ -24,17 +25,17 @@ public class BeamCommand implements CommandExecutor {
 
         if (args.length >= 1) {
             if(args[0].equalsIgnoreCase("scotty")) {
-                player.chat("Beam me up scotty!");
+                player.chat(I18nSupport.getInternationalisedString("Scotty"));
             }
             else if(args[0].equalsIgnoreCase("picard")) {
-                player.chat("Energize!");
+                player.chat(I18nSupport.getInternationalisedString("Picard"));
             }
             else {
-                player.sendMessage(Beaming.PREFIX + "Invalid argument");
+                player.sendMessage(Beaming.PREFIX + I18nSupport.getInternationalisedString("Invalid Argument"));
             }
         }
 
-        player.sendMessage(Beaming.PREFIX + "You beamed to your ship!");
+        player.sendMessage(Beaming.PREFIX + " " + I18nSupport.getInternationalisedString("Beam Message"));
 
         player.setHealth(0);
         player.spigot().respawn();
