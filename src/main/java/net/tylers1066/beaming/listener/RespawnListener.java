@@ -1,5 +1,7 @@
-package net.tylers1066.beaming;
+package net.tylers1066.beaming.listener;
 
+import net.tylers1066.beaming.Beaming;
+import net.tylers1066.beaming.config.Config;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +26,7 @@ public class RespawnListener implements Listener {
                     p.getInventory().setHeldItemSlot(0);
                     p.getInventory().setItemInMainHand(Config.RespawnMainHand);
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), 5L);
+            }.runTaskLater(Beaming.getInstance(), 5L);
         }
         if(Config.EnableRespawnOffHand) {
             new BukkitRunnable() {
@@ -32,7 +34,7 @@ public class RespawnListener implements Listener {
                 public void run() {
                     p.getInventory().setItemInOffHand(Config.RespawnOffHand);
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), 5L);
+            }.runTaskLater(Beaming.getInstance(), 5L);
         }
         if(Config.EnableRespawnStrength) {
             new BukkitRunnable() {
@@ -40,7 +42,7 @@ public class RespawnListener implements Listener {
                 public void run() {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Config.StrengthDuration, Config.StrengthAmplitude));
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), 10L);
+            }.runTaskLater(Beaming.getInstance(), 10L);
         }
         if(Config.EnableRespawnSpeed) {
             new BukkitRunnable() {
@@ -48,24 +50,24 @@ public class RespawnListener implements Listener {
                 public void run() {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Config.SpeedDuration, Config.SpeedAmplitude));
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), 10L);
+            }.runTaskLater(Beaming.getInstance(), 10L);
         }
         if(Config.EnableRespawnResistance) {
-            p.setMetadata("BeamingRespawn", new FixedMetadataValue(BeamingPlugin.getInstance(), null));
+            p.setMetadata("BeamingRespawn", new FixedMetadataValue(Beaming.getInstance(), null));
 
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Config.ResistanceDuration, Config.ResistanceAmplitude));
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), 10L);
+            }.runTaskLater(Beaming.getInstance(), 10L);
 
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.removeMetadata("BeamingRespawn", BeamingPlugin.getInstance());
+                    p.removeMetadata("BeamingRespawn", Beaming.getInstance());
                 }
-            }.runTaskLater(BeamingPlugin.getInstance(), Config.ResistanceDuration);
+            }.runTaskLater(Beaming.getInstance(), Config.ResistanceDuration);
         }
 
     }

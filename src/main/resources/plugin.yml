@@ -1,10 +1,10 @@
-name: BeamingPlugin
+name: Beaming
 version: ${project.version}
-main: net.tylers1066.beaming.BeamingPlugin
+main: net.tylers1066.beaming.Beaming
 api-version: 1.16
 prefix: Beaming
 authors: [TylerS1066]
-description: Beaming Plugin - a companion to movecraft
+description: Beaming - a companion to Movecraft
 website: https://github.com/APDevTeam/Beaming
 commands:
   beam:

@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.TylerS1066.Beaming</groupId>
-    <artifactId>BeamingPlugin</artifactId>
-    <version>1.5.0-SNAPSHOT.1</version>
+    <artifactId>Beaming</artifactId>
+    <version>1.5.0-SNAPSHOT.2</version>
     <packaging>jar</packaging>
 
-    <name>BeamingPlugin</name>
+    <name>Beaming</name>
+    <description>Beaming - a companion to Movecraft</description>
+    <url>https://github.com/APDevTeam/Beaming</url>
 
-    <description>Beaming Plugin - a companion to movecraft</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://github.com/APDevTeam/Beaming</url>
 
     <build>
         <finalName>Beaming</finalName>

@@ -1,5 +1,6 @@
-package net.tylers1066.beaming;
+package net.tylers1066.beaming.listener;
 
+import net.tylers1066.beaming.Beaming;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,8 +12,8 @@ public class DeathListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent e){
         Player p = e.getEntity();
         if(p.hasMetadata("beaming") && p.getMetadata("beaming").get(0).asBoolean()) {
-            e.setDeathMessage(BeamingPlugin.PREFIX + p.getDisplayName() + " beamed to their ship");
-            p.setMetadata("beaming", new FixedMetadataValue(BeamingPlugin.getInstance(),false));
+            e.setDeathMessage(Beaming.PREFIX + p.getDisplayName() + " beamed to their ship");
+            p.setMetadata("beaming", new FixedMetadataValue(Beaming.getInstance(),false));
         }
     }
 }

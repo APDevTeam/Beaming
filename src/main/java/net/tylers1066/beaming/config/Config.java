@@ -1,4 +1,4 @@
-package net.tylers1066.beaming;
+package net.tylers1066.beaming.config;
 
 import org.bukkit.inventory.ItemStack;
 

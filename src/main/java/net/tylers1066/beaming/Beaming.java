@@ -1,5 +1,9 @@
 package net.tylers1066.beaming;
 
+import net.tylers1066.beaming.commands.BeamCommand;
+import net.tylers1066.beaming.config.Config;
+import net.tylers1066.beaming.listener.DeathListener;
+import net.tylers1066.beaming.listener.RespawnListener;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -10,11 +14,11 @@ import org.bukkit.ChatColor;
 
 import java.util.Map;
 
-public class BeamingPlugin extends JavaPlugin implements Listener{
+public class Beaming extends JavaPlugin implements Listener{
     public final static String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
-    private static BeamingPlugin instance;
+    private static Beaming instance;
 
-    static BeamingPlugin getInstance() {
+    public static Beaming getInstance() {
         return instance;
     }
 
@@ -84,7 +88,7 @@ public class BeamingPlugin extends JavaPlugin implements Listener{
             getServer().getPluginManager().registerEvents(new RespawnListener(), this);
         }
 
-        this.getCommand("beam").setExecutor(new BeamingCommand());
+        this.getCommand("beam").setExecutor(new BeamCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
