@@ -81,10 +81,11 @@ public class BeamingPlugin extends JavaPlugin implements Listener{
             }
             getLogger().info("Loaded config.");
 
-            getServer().getPluginManager().registerEvents(new DeathListener(), this);
+            getServer().getPluginManager().registerEvents(new RespawnListener(), this);
         }
 
         this.getCommand("beam").setExecutor(new BeamingCommand());
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
     @Override
