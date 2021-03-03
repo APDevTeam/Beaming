@@ -1,7 +1,6 @@
 package net.tylers1066.beaming.sign;
 
 import com.earth2me.essentials.User;
-import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
 import net.countercraft.movecraft.events.ManOverboardEvent;
@@ -9,10 +8,7 @@ import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.utils.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +18,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.jetbrains.annotations.Nullable;
 
 public class CrewSign implements Listener {
     @EventHandler
@@ -80,11 +75,11 @@ public class CrewSign implements Listener {
         if(c.getSinking() || c.getDisabled())
             return;
 
-        Location sign = getCrewSign(c);
+        Location sign = Utils.getCrewSign(c);
         if(sign == null)
             return;
 
-        Location respawn = getRespawnLocation(sign);
+        Location respawn = Utils.getRespawnLocation(sign);
         if(respawn == null)
             return;
 
@@ -94,54 +89,14 @@ public class CrewSign implements Listener {
 
     @EventHandler
     public void onManOverboard(ManOverboardEvent e) {
-        Location sign = getCrewSign(e.getCraft());
+        Location sign = Utils.getCrewSign(e.getCraft());
         if(sign == null)
             return;
 
-        Location respawn = getRespawnLocation(sign);
+        Location respawn = Utils.getRespawnLocation(sign);
         if(respawn == null)
             return;
 
         e.setLocation(respawn);
-    }
-
-    @Nullable
-    private Location getCrewSign(Craft c) {
-        World w = c.getW();
-        for(MovecraftLocation l : c.getHitBox()) {
-            if(!Utils.isSign(l.toBukkit(c.getW()).getBlock().getType()))
-                continue;
-
-            Location loc = l.toBukkit(c.getW());
-            Sign sign = (Sign) loc.getBlock().getState();
-            if(!ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase("Crew:"))
-                continue;
-
-            if(!Utils.isBed(l.translate(0, -1, 0).toBukkit(w).getBlock().getType()))
-                continue;
-
-            return loc;
-        }
-        return null;
-    }
-
-    @Nullable
-    private Location getRespawnLocation(Location sign) {
-        for(int i = -1; i < 2; i++) {
-            for(int j = -1; j < 2; j++) {
-                Location l = new Location(sign.getWorld(), sign.getBlockX()+i, sign.getBlockY()-1, sign.getBlockZ()+j);
-                if(!l.getBlock().getType().isAir())
-                    continue;
-
-                if(!l.getBlock().getRelative(BlockFace.UP).isEmpty())
-                    continue;
-
-                if(l.getBlock().getRelative(BlockFace.DOWN).isEmpty())
-                    continue;
-
-                return l;
-            }
-        }
-        return null;
     }
 }

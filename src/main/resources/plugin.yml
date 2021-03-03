@@ -12,3 +12,8 @@ commands:
     usage: /beam
     permission: beaming.beam
     permission-message: You don't have the beaming.beam permission.
+  crewbed:
+    description: Gives you the location of your respawn point
+    usage: /crewbed
+    permission: beaming.crewbed
+    permission-message: You don't have the beaming.crewbed permission.
