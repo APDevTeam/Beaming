@@ -1,5 +1,6 @@
 package net.tylers1066.beaming;
 
+import com.earth2me.essentials.Essentials;
 import net.tylers1066.beaming.commands.BeamCommand;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.listener.DeathListener;
@@ -9,16 +10,20 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class Beaming extends JavaPlugin implements Listener{
     public final static String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
     private static Beaming instance;
+    private static Essentials essentials = null;
 
     public static Beaming getInstance() {
         return instance;
@@ -101,14 +106,34 @@ public class Beaming extends JavaPlugin implements Listener{
             getServer().getPluginManager().registerEvents(new RespawnListener(), this);
         }
 
-        // TODO: crew signs
+        Config.EnableCrewSigns = getConfig().getBoolean("EnableCrewSigns", true);
+        Config.SetHomeToCrewSign = getConfig().getBoolean("SetHomeToCrewSign", false);
 
-        this.getCommand("beam").setExecutor(new BeamCommand());
+        if(Config.SetHomeToCrewSign) {
+            Plugin p = getServer().getPluginManager().getPlugin("Essentials");
+            if (p != null && p.getDescription().getName().equalsIgnoreCase("essentials")
+                    && p.getClass().getName().equals("com.earth2me.essentials.Essentials")
+                    && p instanceof Essentials) {
+                essentials = (Essentials) p;
+                getLogger().log(Level.INFO, I18nSupport.getInternationalisedString("Startup - Essentials Found"));
+            }
+            else {
+                getLogger().log(Level.INFO, I18nSupport.getInternationalisedString("Startup - Essentials Not Found"));
+            }
+        }
+
+
+        getCommand("beam").setExecutor(new BeamCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
     @Override
     public void onDisable() {
 
+    }
+
+    @Nullable
+    public Essentials getEssentials() {
+        return essentials;
     }
 }

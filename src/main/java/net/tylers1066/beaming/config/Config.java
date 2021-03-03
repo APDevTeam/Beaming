@@ -21,4 +21,7 @@ public class Config {
     public static ItemStack RespawnMainHand = null;
     public static boolean EnableRespawnOffHand = false;
     public static ItemStack RespawnOffHand = null;
+
+    public static boolean EnableCrewSigns = true;
+    public static boolean SetHomeToCrewSign = false;
 }

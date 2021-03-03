@@ -32,3 +32,6 @@ RespawnOffHand:
     - "Marine's Defense Shield" # Lore of item
   Enchants: # List of enchantments and their levels
     DURABILITY: 3
+
+EnableCrewSigns: true # Enable Crew: signs
+SetHomeToCrewSign: false # Set player's essentials home to priority bed when shift right clicked
