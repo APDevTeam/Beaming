@@ -4,13 +4,13 @@ import com.earth2me.essentials.User;
 import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
+import net.countercraft.movecraft.events.ManOverboardEvent;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
@@ -90,6 +90,19 @@ public class CrewSign implements Listener {
 
         e.setRespawnLocation(respawn);
         p.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Respawn"));
+    }
+
+    @EventHandler
+    public void onManOverboard(ManOverboardEvent e) {
+        Location sign = getCrewSign(e.getCraft());
+        if(sign == null)
+            return;
+
+        Location respawn = getRespawnLocation(sign);
+        if(respawn == null)
+            return;
+
+        e.setLocation(respawn);
     }
 
     @Nullable
