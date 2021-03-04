@@ -6,6 +6,7 @@ import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.listener.DeathListener;
 import net.tylers1066.beaming.listener.RespawnListener;
 import net.tylers1066.beaming.localisation.I18nSupport;
+import net.tylers1066.beaming.sign.CrewSign;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -108,6 +109,10 @@ public class Beaming extends JavaPlugin implements Listener{
 
         Config.EnableCrewSigns = getConfig().getBoolean("EnableCrewSigns", true);
         Config.SetHomeToCrewSign = getConfig().getBoolean("SetHomeToCrewSign", false);
+
+        if(Config.EnableCrewSigns) {
+            getServer().getPluginManager().registerEvents(new CrewSign(), this);
+        }
 
         if(Config.SetHomeToCrewSign) {
             Plugin p = getServer().getPluginManager().getPlugin("Essentials");
