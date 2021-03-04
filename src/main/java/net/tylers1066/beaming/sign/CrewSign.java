@@ -36,7 +36,7 @@ public class CrewSign implements Listener {
         }
 
         Player player = event.getPlayer();
-        if (!player.isSneaking() || !(event.getClickedBlock().getState() instanceof Sign)) {
+        if (!player.isSneaking() || !Utils.isSign(event.getClickedBlock().getType())) {
             return;
         }
         Sign sign = (Sign) event.getClickedBlock().getState();

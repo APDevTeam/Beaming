@@ -2,6 +2,7 @@ package net.tylers1066.beaming.utils;
 
 import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
+import net.tylers1066.beaming.Beaming;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Utils {
     public static boolean isBed(Material m) {
-        return m.name().endsWith("_BED") || m.name().startsWith("_BED");
+        return m.name().endsWith("_BED") || m.name().startsWith("BED_");
     }
 
     public static boolean isSign(Material m) {
@@ -44,7 +45,7 @@ public class Utils {
         for(int i = -1; i < 2; i++) {
             for(int j = -1; j < 2; j++) {
                 Location l = new Location(sign.getWorld(), sign.getBlockX()+i, sign.getBlockY()-1, sign.getBlockZ()+j);
-                if(!l.getBlock().getType().isAir())
+                if(!l.getBlock().isEmpty())
                     continue;
 
                 if(!l.getBlock().getRelative(BlockFace.UP).isEmpty())
