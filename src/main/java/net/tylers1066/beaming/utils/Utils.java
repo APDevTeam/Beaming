@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Utils {
     public static boolean isBed(Material m) {
-        return m.name().endsWith("_BED");
+        return m.name().endsWith("_BED") || m.name().startsWith("_BED");
     }
 
     public static boolean isSign(Material m) {
