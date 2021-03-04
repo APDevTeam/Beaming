@@ -1,6 +1,7 @@
 name: Beaming
 version: ${project.version}
 main: net.tylers1066.beaming.Beaming
+softdepend: [Movecraft, Essentials]
 api-version: 1.16
 prefix: Beaming
 authors: [TylerS1066]
