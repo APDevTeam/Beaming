@@ -2,6 +2,7 @@ package net.tylers1066.beaming;
 
 import com.earth2me.essentials.Essentials;
 import net.tylers1066.beaming.commands.BeamCommand;
+import net.tylers1066.beaming.commands.CrewbedCommand;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.listener.DeathListener;
 import net.tylers1066.beaming.listener.RespawnListener;
@@ -129,6 +130,7 @@ public class Beaming extends JavaPlugin implements Listener{
 
 
         getCommand("beam").setExecutor(new BeamCommand());
+        getCommand("crewbed").setExecutor(new CrewbedCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
