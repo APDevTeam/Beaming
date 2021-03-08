@@ -34,7 +34,7 @@ public class CrewbedCommand implements CommandExecutor {
             return true;
         }
 
-        Location bedLocation = player.getBedLocation();
+        Location bedLocation = player.getBedSpawnLocation();
         sender.sendMessage(I18nSupport.getInternationalisedString("CrewBed - Priority Location") + String.format(": %d, %d, %d", bedLocation.getBlockX(), bedLocation.getBlockY(), bedLocation.getBlockZ()));
         return true;
     }
