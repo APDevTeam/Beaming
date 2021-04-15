@@ -2,7 +2,7 @@ name: Beaming
 version: ${project.version}
 main: net.tylers1066.beaming.Beaming
 softdepend: [Movecraft, Essentials]
-api-version: 1.13
+api-version: 1.14
 prefix: Beaming
 authors: [TylerS1066]
 description: Beaming - a companion to Movecraft
