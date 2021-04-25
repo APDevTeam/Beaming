@@ -6,7 +6,7 @@
 
     <groupId>net.TylerS1066.Beaming</groupId>
     <artifactId>Beaming</artifactId>
-    <version>1.6.a</version>
+    <version>2.a.0</version>
     <packaging>jar</packaging>
 
     <name>Beaming</name>
