@@ -18,14 +18,14 @@ jobs:
         with:
           path: ~/.m2/repository/org/bukkit/craftbukkit/1.14.4-R0.1-SNAPSHOT/
           key: ${{ runner.os }}-1.14.4
-          restore-keys: ${{ runner.os }}-1.14.4
+          restore-keys: ${{ runner.os }}-1.14.4x
       - name: Cache Maven packages
         id: cacheMain
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2_1.14.4
-          restore-keys: ${{ runner.os }}-m2_1.14.4
+          restore-keys: ${{ runner.os }}-m2_1.14.4x
 
       - name: Setup BuildTools
         run: mkdir BuildTools && wget -O BuildTools/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
@@ -51,14 +51,14 @@ jobs:
         with:
           path: ~/.m2/repository/org/bukkit/craftbukkit/1.15.2-R0.1-SNAPSHOT/
           key: ${{ runner.os }}-1.15.2
-          restore-keys: ${{ runner.os }}-1.15.2
+          restore-keys: ${{ runner.os }}-1.15.2x
       - name: Cache Maven packages
         id: cacheMain
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2_1.15.2
-          restore-keys: ${{ runner.os }}-m2_1.15.2
+          restore-keys: ${{ runner.os }}-m2_1.15.2x
 
       - name: Setup BuildTools
         run: mkdir BuildTools && wget -O BuildTools/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
@@ -84,14 +84,14 @@ jobs:
         with:
           path: ~/.m2/repository/org/bukkit/craftbukkit/1.16.1-R0.1-SNAPSHOT/
           key: ${{ runner.os }}-1.16.1
-          restore-keys: ${{ runner.os }}-1.16.1
+          restore-keys: ${{ runner.os }}-1.16.1x
       - name: Cache Maven packages
         id: cacheMain
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2_1.16.1
-          restore-keys: ${{ runner.os }}-m2_1.16.1
+          restore-keys: ${{ runner.os }}-m2_1.16.1x
 
       - name: Setup BuildTools
         run: mkdir BuildTools && wget -O BuildTools/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
@@ -117,14 +117,14 @@ jobs:
         with:
           path: ~/.m2/repository/org/bukkit/craftbukkit/1.16.3-R0.1-SNAPSHOT/
           key: ${{ runner.os }}-1.16.3
-          restore-keys: ${{ runner.os }}-1.16.3
+          restore-keys: ${{ runner.os }}-1.16.3x
       - name: Cache Maven packages
         id: cacheMain
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2_1.16.3
-          restore-keys: ${{ runner.os }}-m2_1.16.3
+          restore-keys: ${{ runner.os }}-m2_1.16.3x
 
       - name: Setup BuildTools
         run: mkdir BuildTools && wget -O BuildTools/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
@@ -150,14 +150,14 @@ jobs:
         with:
           path: ~/.m2/repository/org/bukkit/craftbukkit/1.16.5-R0.1-SNAPSHOT/
           key: ${{ runner.os }}-1.16.5
-          restore-keys: ${{ runner.os }}-1.16.5
+          restore-keys: ${{ runner.os }}-1.16.5x
       - name: Cache Maven packages
         id: cacheMain
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2_1.16.5
-          restore-keys: ${{ runner.os }}-m2_1.16.5
+          restore-keys: ${{ runner.os }}-m2_1.16.5x
 
       - name: Setup BuildTools
         run: mkdir BuildTools && wget -O BuildTools/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
