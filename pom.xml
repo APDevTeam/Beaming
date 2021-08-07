@@ -76,6 +76,17 @@
             <id>ess-repo</id>
             <url>https://ci.ender.zone/plugin/repository/everything/</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub APDevTeam/Movecraft Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/APDevTeam/Movecraft</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -88,11 +99,10 @@
         </dependency>
         <!--Movecraft-->
         <dependency>
-            <groupId>net.countercraft.movecraft</groupId>
-            <artifactId>Movecraft</artifactId>
+            <groupId>net.countercraft</groupId>
+            <artifactId>movecraft</artifactId>
             <version>LATEST</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../Movecraft/target/Movecraft.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         <!--EssentialsX-->
         <dependency>
