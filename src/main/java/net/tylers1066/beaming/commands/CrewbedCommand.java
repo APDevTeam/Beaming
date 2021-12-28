@@ -16,26 +16,26 @@ import org.jetbrains.annotations.Nullable;
 public class CrewbedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String s, @NotNull String[] args) {
-        if(!cmd.getName().equalsIgnoreCase("crewbed"))
+        if (!cmd.getName().equalsIgnoreCase("crewbed"))
             return false;
 
-        if(!sender.hasPermission("beaming.crewbed"))
+        if (!sender.hasPermission("beaming.crewbed"))
             return false;
 
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage(Beaming.PREFIX + I18nSupport.getInternationalisedString("CrewBed - Must Be Player"));
             return true;
         }
 
         Player player = (Player) sender;
         Location respawnLoc = getActiveCrewSign(player);
-        if(respawnLoc != null) {
+        if (respawnLoc != null) {
             sender.sendMessage(I18nSupport.getInternationalisedString("CrewBed - Current Location") + String.format(": %d, %d, %d", respawnLoc.getBlockX(), respawnLoc.getBlockY(), respawnLoc.getBlockZ()));
             return true;
         }
 
         Location bedLocation = player.getBedSpawnLocation();
-        if(bedLocation != null)
+        if (bedLocation != null)
             sender.sendMessage(I18nSupport.getInternationalisedString("CrewBed - Priority Location") + String.format(": %d, %d, %d", bedLocation.getBlockX(), bedLocation.getBlockY(), bedLocation.getBlockZ()));
         else
             sender.sendMessage(I18nSupport.getInternationalisedString("CrewBed - No Location"));
@@ -45,11 +45,11 @@ public class CrewbedCommand implements CommandExecutor {
     @Nullable
     private Location getActiveCrewSign(Player player) {
         Craft craft = CraftManager.getInstance().getCraftByPlayer(player);
-        if(craft == null)
+        if (craft == null)
             return null;
 
         Location sign = Utils.getCrewSign(craft);
-        if(sign == null)
+        if (sign == null)
             return null;
 
         return Utils.getRespawnLocation(sign);

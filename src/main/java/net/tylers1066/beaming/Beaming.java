@@ -8,21 +8,21 @@ import net.tylers1066.beaming.listener.DeathListener;
 import net.tylers1066.beaming.listener.RespawnListener;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.sign.CrewSign;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.event.Listener;
-import org.bukkit.ChatColor;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class Beaming extends JavaPlugin implements Listener{
+public class Beaming extends JavaPlugin implements Listener {
     public final static String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
     private static Beaming instance;
     private static Essentials essentials = null;
@@ -49,7 +49,7 @@ public class Beaming extends JavaPlugin implements Listener{
         I18nSupport.init();
 
 
-        if(getConfig().getBoolean("EnableRespawn", false)) {
+        if (getConfig().getBoolean("EnableRespawn", false)) {
             try {
                 Config.EnableRespawn = true;
                 Config.EnableRespawnStrength = getConfig().getBoolean("EnableRespawnStrength", false);
@@ -74,7 +74,7 @@ public class Beaming extends JavaPlugin implements Listener{
                     Map<String, Object> enchants = getConfig().getConfigurationSection("RespawnMainHand.Enchants").getValues(false);
                     for (String s : enchants.keySet()) {
                         Object o = enchants.get(s);
-                        if(!(o instanceof Integer))
+                        if (!(o instanceof Integer))
                             continue;
 
                         Config.RespawnMainHand.addUnsafeEnchantment(Enchantment.getByName(s), (Integer) enchants.get(s));
@@ -92,7 +92,7 @@ public class Beaming extends JavaPlugin implements Listener{
                     Map<String, Object> enchants = getConfig().getConfigurationSection("RespawnOffHand.Enchants").getValues(false);
                     for (String s : enchants.keySet()) {
                         Object o = enchants.get(s);
-                        if(!(o instanceof Integer))
+                        if (!(o instanceof Integer))
                             continue;
 
                         Config.RespawnOffHand.addUnsafeEnchantment(Enchantment.getByName(s), (Integer) enchants.get(s));
@@ -111,11 +111,11 @@ public class Beaming extends JavaPlugin implements Listener{
         Config.EnableCrewSigns = getConfig().getBoolean("EnableCrewSigns", true);
         Config.SetHomeToCrewSign = getConfig().getBoolean("SetHomeToCrewSign", false);
 
-        if(Config.EnableCrewSigns) {
+        if (Config.EnableCrewSigns) {
             getServer().getPluginManager().registerEvents(new CrewSign(), this);
         }
 
-        if(Config.SetHomeToCrewSign) {
+        if (Config.SetHomeToCrewSign) {
             Plugin p = getServer().getPluginManager().getPlugin("Essentials");
             if (p != null && p.getDescription().getName().equalsIgnoreCase("essentials")
                     && p.getClass().getName().equals("com.earth2me.essentials.Essentials")
@@ -132,11 +132,6 @@ public class Beaming extends JavaPlugin implements Listener{
         getCommand("beam").setExecutor(new BeamCommand());
         getCommand("crewbed").setExecutor(new CrewbedCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
-    }
-
-    @Override
-    public void onDisable() {
-
     }
 
     @Nullable

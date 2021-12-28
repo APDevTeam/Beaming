@@ -4,22 +4,24 @@ import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 public class RespawnListener implements Listener {
-    @EventHandler
-    public void onRespawn(PlayerRespawnEvent e) {
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onRespawn(@NotNull PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        if(!Config.EnableRespawn) {
+        if (!Config.EnableRespawn) {
             return;
         }
 
-        if(Config.EnableRespawnMainHand) {
+        if (Config.EnableRespawnMainHand) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -28,7 +30,7 @@ public class RespawnListener implements Listener {
                 }
             }.runTaskLater(Beaming.getInstance(), 5L);
         }
-        if(Config.EnableRespawnOffHand) {
+        if (Config.EnableRespawnOffHand) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -36,7 +38,7 @@ public class RespawnListener implements Listener {
                 }
             }.runTaskLater(Beaming.getInstance(), 5L);
         }
-        if(Config.EnableRespawnStrength) {
+        if (Config.EnableRespawnStrength) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -44,7 +46,7 @@ public class RespawnListener implements Listener {
                 }
             }.runTaskLater(Beaming.getInstance(), 10L);
         }
-        if(Config.EnableRespawnSpeed) {
+        if (Config.EnableRespawnSpeed) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -52,7 +54,7 @@ public class RespawnListener implements Listener {
                 }
             }.runTaskLater(Beaming.getInstance(), 10L);
         }
-        if(Config.EnableRespawnResistance) {
+        if (Config.EnableRespawnResistance) {
             p.setMetadata("BeamingRespawn", new FixedMetadataValue(Beaming.getInstance(), null));
 
             new BukkitRunnable() {

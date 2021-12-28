@@ -3,7 +3,11 @@ package net.tylers1066.beaming.localisation;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -22,7 +26,8 @@ public class I18nSupport {
         InputStream is = null;
         try {
             is = new FileInputStream(localisationDirectory.getAbsolutePath() + "/beaminglang" + "_" + Config.Locale + ".properties");
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -35,7 +40,8 @@ public class I18nSupport {
         try {
             languageFile.load(is);
             is.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -44,10 +50,9 @@ public class I18nSupport {
 
     public static String getInternationalisedString(String key) {
         String ret = languageFile.getProperty(key);
-        if (ret != null) {
+        if (ret != null)
             return ret;
-        } else {
+        else
             return key;
-        }
     }
 }
