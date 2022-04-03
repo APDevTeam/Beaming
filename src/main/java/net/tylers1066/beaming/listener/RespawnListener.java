@@ -17,9 +17,8 @@ public class RespawnListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onRespawn(@NotNull PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        if (!Config.EnableRespawn) {
+        if (!Config.EnableRespawn)
             return;
-        }
 
         if (Config.EnableRespawnMainHand) {
             new BukkitRunnable() {
@@ -69,7 +68,7 @@ public class RespawnListener implements Listener {
                 public void run() {
                     p.removeMetadata("BeamingRespawn", Beaming.getInstance());
                 }
-            }.runTaskLater(Beaming.getInstance(), Config.ResistanceDuration);
+            }.runTaskLater(Beaming.getInstance(), 10L + Config.ResistanceDuration);
         }
 
     }
