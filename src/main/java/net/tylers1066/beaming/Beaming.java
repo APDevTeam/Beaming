@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 public class Beaming extends JavaPlugin implements Listener {
-    public final static String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
+    public static final String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
     private static Beaming instance;
     private static Essentials essentials = null;
 
@@ -118,7 +118,6 @@ public class Beaming extends JavaPlugin implements Listener {
         if (Config.SetHomeToCrewSign) {
             Plugin p = getServer().getPluginManager().getPlugin("Essentials");
             if (p != null && p.getDescription().getName().equalsIgnoreCase("essentials")
-                    && p.getClass().getName().equals("com.earth2me.essentials.Essentials")
                     && p instanceof Essentials) {
                 essentials = (Essentials) p;
                 getLogger().log(Level.INFO, I18nSupport.getInternationalisedString("Startup - Essentials Found"));
