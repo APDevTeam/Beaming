@@ -3,6 +3,7 @@ package net.tylers1066.beaming.sign;
 import com.earth2me.essentials.User;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
+import net.countercraft.movecraft.craft.SinkingCraft;
 import net.countercraft.movecraft.events.ManOverboardEvent;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
@@ -78,7 +79,7 @@ public class CrewSign implements Listener {
         Craft c = CraftManager.getInstance().getCraftByPlayer(p);
         if (c == null)
             return;
-        if (c.getSinking() || c.getDisabled())
+        if (c instanceof SinkingCraft || c.getDisabled())
             return;
 
         Location sign = Utils.getCrewSign(c);
