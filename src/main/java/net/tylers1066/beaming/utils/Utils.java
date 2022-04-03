@@ -14,9 +14,9 @@ import org.jetbrains.annotations.Nullable;
 public class Utils {
     @Nullable
     public static Location getCrewSign(@NotNull Craft c) {
-        World w = c.getW();
+        World w = c.getWorld();
         for (MovecraftLocation l : c.getHitBox()) {
-            Location loc = l.toBukkit(c.getW());
+            Location loc = l.toBukkit(c.getWorld());
             if(!(loc.getBlock().getState() instanceof Sign))
                 continue;
 
