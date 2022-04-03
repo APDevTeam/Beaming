@@ -14,9 +14,10 @@ public class DeathListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onPlayerDeath(@NotNull PlayerDeathEvent e) {
         Player p = e.getEntity();
-        if (p.hasMetadata("beaming") && p.getMetadata("beaming").get(0).asBoolean()) {
-            e.setDeathMessage(Beaming.PREFIX + p.getDisplayName() + " " + I18nSupport.getInternationalisedString("Beam Announcement"));
-            p.setMetadata("beaming", new FixedMetadataValue(Beaming.getInstance(), false));
-        }
+        if (!p.hasMetadata("beaming") || !p.getMetadata("beaming").get(0).asBoolean())
+            return;
+
+        e.setDeathMessage(Beaming.PREFIX + p.getDisplayName() + " " + I18nSupport.getInternationalisedString("Beam Announcement"));
+        p.setMetadata("beaming", new FixedMetadataValue(Beaming.getInstance(), false));
     }
 }
