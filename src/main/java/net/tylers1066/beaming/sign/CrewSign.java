@@ -9,6 +9,8 @@ import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.utils.Utils;
+
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Tag;
 import org.bukkit.block.Sign;
@@ -65,6 +67,7 @@ public class CrewSign implements Listener {
         Location location = sign.getLocation();
         player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Spawn Set"));
         player.setBedSpawnLocation(location, true);
+        sign.setLine(0, ChatColor.BOLD + "Crew:");
 
         if (!Config.SetHomeToCrewSign || Beaming.getInstance().getEssentials() == null)
             return;
