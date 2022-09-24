@@ -14,7 +14,7 @@
     <url>https://github.com/APDevTeam/Beaming</url>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>13</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -74,7 +74,7 @@
         </repository>
         <repository>
             <id>ess-repo</id>
-            <url>https://ci.ender.zone/plugin/repository/everything/</url>
+            <url>https://repo.essentialsx.net/releases/</url>
         </repository>
         <repository>
             <id>github</id>
