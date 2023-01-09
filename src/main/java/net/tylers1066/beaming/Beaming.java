@@ -109,6 +109,7 @@ public class Beaming extends JavaPlugin implements Listener {
         }
 
         Config.EnableCrewSigns = getConfig().getBoolean("EnableCrewSigns", true);
+        Config.UpdateBedLocations = getConfig().getBoolean("UpdateBedLocations", false);
         Config.SetHomeToCrewSign = getConfig().getBoolean("SetHomeToCrewSign", false);
 
         if (Config.EnableCrewSigns) {

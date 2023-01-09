@@ -5,14 +5,16 @@ import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
 import net.countercraft.movecraft.craft.SinkingCraft;
 import net.countercraft.movecraft.events.ManOverboardEvent;
+import net.countercraft.movecraft.events.SignTranslateEvent;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.utils.Utils;
-
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Tag;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -74,6 +76,23 @@ public class CrewSign implements Listener {
 
         User u = Beaming.getInstance().getEssentials().getUser(player);
         u.setHome("home", location);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onSignTranslate(@NotNull SignTranslateEvent event) {
+        if (!Config.UpdateBedLocations)
+            return;
+
+        Location signLocation = event.getLocations().get(0).toBukkit(event.getCraft().getWorld());
+        String name = Utils.checkCrewSign(signLocation, event::getLine);
+        if (name == null)
+            return;
+
+        Player player = Bukkit.getPlayerExact(name);
+        if (player == null) // cannot change the spawnpoints of offline players
+            return;
+
+        player.setBedSpawnLocation(signLocation.getBlock().getRelative(BlockFace.DOWN).getLocation());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)

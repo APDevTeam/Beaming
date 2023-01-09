@@ -5,29 +5,38 @@ import net.countercraft.movecraft.craft.Craft;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Tag;
-import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public class Utils {
+    public static @Nullable String checkCrewSign(@NotNull Location signLocation, Function<Integer, String> getLineFunction) {
+        if (!ChatColor.stripColor(getLineFunction.apply(0)).equalsIgnoreCase("Crew:"))
+            return null;
+
+        if (!Tag.BEDS.getValues().contains(signLocation.getBlock().getRelative(BlockFace.DOWN).getType()))
+            return null;
+
+        return getLineFunction.apply(1);
+    }
+
+    public static @Nullable String checkCrewSign(@NotNull Location signLocation) {
+        if(!(signLocation.getBlock().getState() instanceof Sign))
+            return null;
+
+        Sign sign = (Sign) signLocation.getBlock().getState();
+        return checkCrewSign(signLocation, sign::getLine);
+    }
+
     @Nullable
     public static Location getCrewSign(@NotNull Craft c) {
-        World w = c.getWorld();
         for (MovecraftLocation l : c.getHitBox()) {
             Location loc = l.toBukkit(c.getWorld());
-            if(!(loc.getBlock().getState() instanceof Sign))
-                continue;
-
-            Sign sign = (Sign) loc.getBlock().getState();
-            if (!ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase("Crew:"))
-                continue;
-
-            if (!Tag.BEDS.getValues().contains(l.translate(0, -1, 0).toBukkit(w).getBlock().getType()))
-                continue;
-
-            return loc;
+            if (checkCrewSign(loc) != null)
+                return loc;
         }
         return null;
     }

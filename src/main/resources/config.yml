@@ -34,4 +34,5 @@ RespawnOffHand:
     DURABILITY: 3
 
 EnableCrewSigns: true # Enable Crew: signs
+UpdateBedLocations: false # Update players' bed locations to crew signs when the craft is moved
 SetHomeToCrewSign: false # Set player's essentials home to priority bed when shift right clicked
