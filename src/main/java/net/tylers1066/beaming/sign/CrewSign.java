@@ -1,6 +1,7 @@
 package net.tylers1066.beaming.sign;
 
 import com.earth2me.essentials.User;
+import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
 import net.countercraft.movecraft.craft.SinkingCraft;
@@ -10,10 +11,8 @@ import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Tag;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -80,19 +79,24 @@ public class CrewSign implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onSignTranslate(@NotNull SignTranslateEvent event) {
-        if (!Config.UpdateBedLocations)
+        if (!Config.UpdateBedLocations || !Utils.isCrewSign(event::getLine))
             return;
 
-        Location signLocation = event.getLocations().get(0).toBukkit(event.getCraft().getWorld());
-        String name = Utils.checkCrewSign(signLocation, event::getLine);
-        if (name == null)
-            return;
+        World w = event.getCraft().getWorld();
+        for (MovecraftLocation l : event.getLocations()) {
+            Location signLocation = l.toBukkit(w);
 
-        Player player = Bukkit.getPlayerExact(name);
-        if (player == null) // cannot change the spawnpoints of offline players
-            return;
+            Block bed = Utils.getBedBlock(signLocation);
+            if (!Utils.isBed(bed))
+                continue;
 
-        player.setBedSpawnLocation(signLocation.getBlock().getRelative(BlockFace.DOWN).getLocation());
+            Player player = Bukkit.getPlayerExact(event.getLine(1));
+            if (player == null) // cannot change the bed locations of offline players
+                continue;
+
+            player.setBedSpawnLocation(bed.getLocation());
+            break; // stop after the first valid sign placement
+        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)

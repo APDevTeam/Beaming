@@ -5,6 +5,7 @@ import net.countercraft.movecraft.craft.Craft;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Tag;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
@@ -13,11 +14,23 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 
 public class Utils {
-    public static @Nullable String checkCrewSign(@NotNull Location signLocation, Function<Integer, String> getLineFunction) {
-        if (!ChatColor.stripColor(getLineFunction.apply(0)).equalsIgnoreCase("Crew:"))
+    public static boolean isCrewSign(@NotNull Function<Integer, String> getLineFunction) {
+        return ChatColor.stripColor(getLineFunction.apply(0)).equalsIgnoreCase("Crew:");
+    }
+
+    public static @NotNull Block getBedBlock(@NotNull Location signLocation) {
+        return signLocation.getBlock().getRelative(BlockFace.DOWN);
+    }
+
+    public static boolean isBed(@NotNull Block block) {
+        return Tag.BEDS.getValues().contains(block.getType());
+    }
+
+    public static @Nullable String checkCrewSign(@NotNull Location signLocation, @NotNull Function<Integer, String> getLineFunction) {
+        if (!isCrewSign(getLineFunction))
             return null;
 
-        if (!Tag.BEDS.getValues().contains(signLocation.getBlock().getRelative(BlockFace.DOWN).getType()))
+        if (!isBed(getBedBlock(signLocation)))
             return null;
 
         return getLineFunction.apply(1);
