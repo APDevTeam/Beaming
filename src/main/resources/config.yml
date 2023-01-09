@@ -34,5 +34,7 @@ RespawnOffHand:
     DURABILITY: 3
 
 EnableCrewSigns: true # Enable Crew: signs
+HandleRespawnWhenPiloting: true # When enabled the plugin will attempt to respawn pilots at a crew sign
+HandleManOverBoard: true # When enabled /manoverboard will attempt teleport the player to a crew sign
 UpdateBedLocations: false # Update players' bed locations to crew signs when the craft is moved
 SetHomeToCrewSign: false # Set player's essentials home to priority bed when shift right clicked

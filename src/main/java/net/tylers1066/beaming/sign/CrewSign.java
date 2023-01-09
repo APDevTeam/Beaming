@@ -101,6 +101,9 @@ public class CrewSign implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(@NotNull PlayerRespawnEvent e) {
+        if (!Config.HandleRespawnWhenPiloting)
+            return;
+
         Player p = e.getPlayer();
         Craft c = CraftManager.getInstance().getCraftByPlayer(p);
         if (c == null)
@@ -122,6 +125,9 @@ public class CrewSign implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onManOverboard(@NotNull ManOverboardEvent e) {
+        if (!Config.HandleManOverBoard)
+            return;
+
         Location sign = Utils.getCrewSign(e.getCraft());
         if (sign == null)
             return;

@@ -23,6 +23,8 @@ public class Config {
     public static ItemStack RespawnOffHand = null;
 
     public static boolean EnableCrewSigns = true;
+    public static boolean HandleRespawnWhenPiloting = true;
+    public static boolean HandleManOverBoard = true;
     public static boolean UpdateBedLocations = false;
     public static boolean SetHomeToCrewSign = false;
 }
