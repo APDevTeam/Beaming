@@ -5,7 +5,9 @@ import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
 import net.countercraft.movecraft.craft.PlayerCraft;
 import net.countercraft.movecraft.craft.SinkingCraft;
+import net.countercraft.movecraft.events.CraftPilotEvent;
 import net.countercraft.movecraft.events.CraftReleaseEvent;
+import net.countercraft.movecraft.events.CraftSinkEvent;
 import net.countercraft.movecraft.events.ManOverboardEvent;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
@@ -27,9 +29,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CrewSign implements Listener {
+
+    private final Map<String, Craft> respawnCrafts = new HashMap<>();
+
+    private void removeRespawnCraft(@NotNull Craft craft) {
+        respawnCrafts.values().removeIf(c -> c == craft);
+    }
+
+    private void setRespawnCraft(@NotNull String name, @NotNull Craft craft) {
+        respawnCrafts.put(name, craft);
+    }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public final void onSignChange(@NotNull SignChangeEvent event) {
         if (!event.getLine(0).equalsIgnoreCase("Crew:"))
@@ -82,7 +96,22 @@ public class CrewSign implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onPilot(@NotNull CraftPilotEvent event) {
+        for (Map.Entry<String, Location> entry : Utils.getAllCrewSigns(event.getCraft()).entrySet()) {
+            setRespawnCraft(entry.getKey(), event.getCraft());
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onSink(CraftSinkEvent event) {
+        // do not allow respawning on sinking crafts
+        removeRespawnCraft(event.getCraft());
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onRelease(@NotNull CraftReleaseEvent event) {
+        removeRespawnCraft(event.getCraft());
+
         if (!Config.UpdateBedLocations)
             return;
 
@@ -102,23 +131,28 @@ public class CrewSign implements Listener {
         if (!Config.HandleRespawnWhenPiloting)
             return;
 
-        Player p = e.getPlayer();
-        Craft c = CraftManager.getInstance().getCraftByPlayer(p);
-        if (c == null)
+        String name = e.getPlayer().getName();
+        Craft craft = respawnCrafts.get(name);
+        if (craft == null)
             return;
-        if (c instanceof SinkingCraft || c.getDisabled())
+        if (craft instanceof SinkingCraft || craft.getDisabled()) {
+            // do not allow respawning on sinking or disabled crafts
+            removeRespawnCraft(craft);
             return;
+        }
 
-        Location sign = Utils.getCrewSign(c, p.getName());
-        if (sign == null)
+        Location sign = Utils.getCrewSign(craft, name);
+        if (sign == null) { // crew sign was destroyed
+            respawnCrafts.remove(name);
             return;
+        }
 
         Location respawn = Utils.getRespawnLocation(sign);
         if (respawn == null)
             return;
 
         e.setRespawnLocation(respawn);
-        p.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Respawn"));
+        e.getPlayer().sendMessage(I18nSupport.getInternationalisedString("CrewSign - Respawn"));
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
