@@ -11,6 +11,8 @@ import org.bukkit.block.Sign;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Utils {
@@ -44,6 +46,31 @@ public class Utils {
         return checkCrewSign(signLocation, sign::getLine);
     }
 
+    public static @NotNull Map<String, Location> getAllCrewSigns(@NotNull Craft craft) {
+        Map<String, Location> signs = new HashMap<>();
+        for (MovecraftLocation l : craft.getHitBox()) {
+            Location location = l.toBukkit(craft.getWorld());
+            String name = checkCrewSign(location);
+            if (name != null)
+                signs.putIfAbsent(name, location);
+        }
+        return signs;
+    }
+
+    public static @Nullable Location getCrewSign(@NotNull Craft craft, @NotNull String name) {
+        for (MovecraftLocation l : craft.getHitBox()) {
+            Location location = l.toBukkit(craft.getWorld());
+            if (name.equalsIgnoreCase(checkCrewSign(location)))
+                return location;
+        }
+        return null;
+    }
+
+    /**
+     * @deprecated Crew signs have a specific player
+     * @see #getCrewSign(Craft, String)
+     */
+    @Deprecated
     @Nullable
     public static Location getCrewSign(@NotNull Craft c) {
         for (MovecraftLocation l : c.getHitBox()) {

@@ -48,7 +48,7 @@ public class CrewbedCommand implements CommandExecutor {
         if (craft == null)
             return null;
 
-        Location sign = Utils.getCrewSign(craft);
+        Location sign = Utils.getCrewSign(craft, player.getName());
         if (sign == null)
             return null;
 

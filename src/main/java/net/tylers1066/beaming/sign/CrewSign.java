@@ -4,6 +4,7 @@ import com.earth2me.essentials.User;
 import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
+import net.countercraft.movecraft.craft.PlayerCraft;
 import net.countercraft.movecraft.craft.SinkingCraft;
 import net.countercraft.movecraft.events.ManOverboardEvent;
 import net.countercraft.movecraft.events.SignTranslateEvent;
@@ -114,7 +115,7 @@ public class CrewSign implements Listener {
         if (c instanceof SinkingCraft || c.getDisabled())
             return;
 
-        Location sign = Utils.getCrewSign(c);
+        Location sign = Utils.getCrewSign(c, p.getName());
         if (sign == null)
             return;
 
@@ -128,10 +129,11 @@ public class CrewSign implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onManOverboard(@NotNull ManOverboardEvent e) {
-        if (!Config.HandleManOverBoard)
+        if (!Config.HandleManOverBoard || !(e.getCraft() instanceof PlayerCraft))
             return;
 
-        Location sign = Utils.getCrewSign(e.getCraft());
+        Player pilot = ((PlayerCraft) e.getCraft()).getPilot();
+        Location sign = Utils.getCrewSign(e.getCraft(), pilot.getName());
         if (sign == null)
             return;
 
