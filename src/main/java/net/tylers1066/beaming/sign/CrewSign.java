@@ -1,13 +1,12 @@
 package net.tylers1066.beaming.sign;
 
 import com.earth2me.essentials.User;
-import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
 import net.countercraft.movecraft.craft.PlayerCraft;
 import net.countercraft.movecraft.craft.SinkingCraft;
+import net.countercraft.movecraft.events.CraftReleaseEvent;
 import net.countercraft.movecraft.events.ManOverboardEvent;
-import net.countercraft.movecraft.events.SignTranslateEvent;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
@@ -16,7 +15,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Tag;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -28,6 +26,8 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 public class CrewSign implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
@@ -82,24 +82,18 @@ public class CrewSign implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onSignTranslate(@NotNull SignTranslateEvent event) {
-        if (!Config.UpdateBedLocations || !Utils.isCrewSign(event::getLine))
+    public void onRelease(@NotNull CraftReleaseEvent event) {
+        if (!Config.UpdateBedLocations)
             return;
 
-        World w = event.getCraft().getWorld();
-        for (MovecraftLocation l : event.getLocations()) {
-            Location signLocation = l.toBukkit(w);
+        for (Map.Entry<String, Location> entry : Utils.getAllCrewSigns(event.getCraft()).entrySet()) {
 
-            Block bed = Utils.getBedBlock(signLocation);
-            if (!Utils.isBed(bed))
-                continue;
-
-            Player player = Bukkit.getPlayerExact(event.getLine(1));
+            Player player = Bukkit.getPlayerExact(entry.getKey());
             if (player == null) // cannot change the bed locations of offline players
                 continue;
 
+            Block bed = Utils.getBedBlock(entry.getValue());
             player.setBedSpawnLocation(bed.getLocation());
-            break; // stop after the first valid sign placement
         }
     }
 
