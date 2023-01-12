@@ -95,7 +95,7 @@ public class Utils {
                 if (l.getBlock().getRelative(BlockFace.DOWN).isEmpty())
                     continue;
 
-                return l;
+                return l.add(0.5, 0, 0.5); // spawn in center of block
             }
         }
         return null;
