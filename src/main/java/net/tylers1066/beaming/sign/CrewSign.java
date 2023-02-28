@@ -1,10 +1,14 @@
 package net.tylers1066.beaming.sign;
 
 import com.earth2me.essentials.User;
+import net.countercraft.movecraft.MovecraftLocation;
 import net.countercraft.movecraft.craft.Craft;
 import net.countercraft.movecraft.craft.CraftManager;
+import net.countercraft.movecraft.craft.PlayerCraft;
 import net.countercraft.movecraft.craft.SinkingCraft;
+import net.countercraft.movecraft.craft.type.CraftType;
 import net.countercraft.movecraft.events.ManOverboardEvent;
+import net.countercraft.movecraft.util.MathUtils;
 import net.tylers1066.beaming.Beaming;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.localisation.I18nSupport;
@@ -23,6 +27,8 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class CrewSign implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
@@ -65,6 +71,19 @@ public class CrewSign implements Listener {
         }
 
         Location location = sign.getLocation();
+        MovecraftLocation movecraftLocation = MathUtils.bukkit2MovecraftLoc(location);
+        for (Craft craft : CraftManager.getInstance().getCraftsInWorld(location.getWorld())) {
+            if (!(craft instanceof PlayerCraft)) continue;
+            if (craft.getHitBox().contains(movecraftLocation)) {
+                HashMap crewMap = Beaming.getInstance().getCrewCrafts();
+                if (crewMap.containsKey(player)) {
+                    crewMap.remove(player);
+                }
+                crewMap.put(player, craft);
+                player.sendMessage(Beaming.PREFIX + String.format(I18nSupport.getInternationalisedString("Joined Ship"), craft.getType().getStringProperty(CraftType.NAME), ((PlayerCraft) craft).getPilot().getDisplayName()));
+                return;
+            }
+        }
         player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Spawn Set"));
         player.setBedSpawnLocation(location, true);
         sign.setLine(0, ChatColor.BOLD + "Crew:");
@@ -79,7 +98,16 @@ public class CrewSign implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(@NotNull PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        Craft c = CraftManager.getInstance().getCraftByPlayer(p);
+        Craft c;
+        if (Beaming.getInstance().getCrewCrafts().containsKey(p)) {
+            c = Beaming.getInstance().getCrewCrafts().get(p);
+            if (c instanceof SinkingCraft || c.getDisabled()) {
+                Beaming.getInstance().getCrewCrafts().remove(p);
+                c = CraftManager.getInstance().getCraftByPlayer(p);
+            }
+        } else {
+            c = CraftManager.getInstance().getCraftByPlayer(p);
+        }
         if (c == null)
             return;
         if (c instanceof SinkingCraft || c.getDisabled())

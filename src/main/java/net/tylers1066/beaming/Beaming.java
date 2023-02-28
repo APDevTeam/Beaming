@@ -1,16 +1,20 @@
 package net.tylers1066.beaming;
 
 import com.earth2me.essentials.Essentials;
+import net.countercraft.movecraft.craft.Craft;
+import net.tylers1066.beaming.commands.AbandonShipCommand;
 import net.tylers1066.beaming.commands.BeamCommand;
 import net.tylers1066.beaming.commands.CrewbedCommand;
 import net.tylers1066.beaming.config.Config;
 import net.tylers1066.beaming.listener.DeathListener;
+import net.tylers1066.beaming.listener.ReleaseListener;
 import net.tylers1066.beaming.listener.RespawnListener;
 import net.tylers1066.beaming.localisation.I18nSupport;
 import net.tylers1066.beaming.sign.CrewSign;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -26,6 +31,8 @@ public class Beaming extends JavaPlugin implements Listener {
     public static final String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.YELLOW + "Beaming" + ChatColor.DARK_BLUE + "] " + ChatColor.RED;
     private static Beaming instance;
     private static Essentials essentials = null;
+
+    private HashMap<Player, Craft> crewCrafts = new HashMap<>();
 
     public static Beaming getInstance() {
         return instance;
@@ -113,6 +120,7 @@ public class Beaming extends JavaPlugin implements Listener {
 
         if (Config.EnableCrewSigns) {
             getServer().getPluginManager().registerEvents(new CrewSign(), this);
+            getServer().getPluginManager().registerEvents(new ReleaseListener(), this);
         }
 
         if (Config.SetHomeToCrewSign) {
@@ -130,6 +138,7 @@ public class Beaming extends JavaPlugin implements Listener {
 
         getCommand("beam").setExecutor(new BeamCommand());
         getCommand("crewbed").setExecutor(new CrewbedCommand());
+        getCommand("abandonship").setExecutor(new AbandonShipCommand());
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
     }
 
@@ -137,4 +146,6 @@ public class Beaming extends JavaPlugin implements Listener {
     public Essentials getEssentials() {
         return essentials;
     }
+
+    public HashMap<Player, Craft> getCrewCrafts() {return crewCrafts;}
 }

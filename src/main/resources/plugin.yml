@@ -18,3 +18,8 @@ commands:
     usage: /crewbed
     permission: beaming.crewbed
     permission-message: You don't have the beaming.crewbed permission.
+  abandonship:
+    description: Removes you from the crew of all crafts.
+    usage: /abandonship
+    permission: beaming.abandonship
+    permission-message: You don't have the beaming.abandonship permission.
