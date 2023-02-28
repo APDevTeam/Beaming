@@ -61,10 +61,7 @@ public class CrewSign implements Listener {
             player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Need Bed Below"));
             return;
         }
-        if (!sign.getLine(1).equalsIgnoreCase(player.getName())) {
-            player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Sign Not Owned"));
-            return;
-        }
+
         if (CraftManager.getInstance().getCraftByPlayer(player) != null) {
             player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Craft Currently Piloted"));
             return;
@@ -84,6 +81,12 @@ public class CrewSign implements Listener {
                 return;
             }
         }
+
+        if (!sign.getLine(1).equalsIgnoreCase(player.getName())) {
+            player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Sign Not Owned"));
+            return;
+        }
+        
         player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Spawn Set"));
         player.setBedSpawnLocation(location, true);
         sign.setLine(0, ChatColor.BOLD + "Crew:");
