@@ -39,18 +39,17 @@ public class CrewSign implements Listener {
         if (!Config.EnableCrewSigns || !event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
             return;
 
-
         Player player = event.getPlayer();
         if (!player.isSneaking())
             return;
 
-        if (event.getClickedBlock() == null || !(event.getClickedBlock().getState() instanceof Sign))
+        if (event.getClickedBlock() == null || !(event.getClickedBlock().getState() instanceof Sign sign))
             return;
 
-        Sign sign = (Sign) event.getClickedBlock().getState();
         if (!sign.getLine(0).equalsIgnoreCase("Crew:"))
             return;
 
+        event.setCancelled(true);
         if (!Tag.BEDS.getValues().contains(sign.getBlock().getRelative(0, -1, 0).getType())) {
             player.sendMessage(I18nSupport.getInternationalisedString("CrewSign - Need Bed Below"));
             return;
