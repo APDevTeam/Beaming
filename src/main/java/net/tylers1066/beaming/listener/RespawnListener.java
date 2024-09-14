@@ -41,7 +41,7 @@ public class RespawnListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Config.StrengthDuration, Config.StrengthAmplitude));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, Config.StrengthDuration, Config.StrengthAmplitude));
                 }
             }.runTaskLater(Beaming.getInstance(), 10L);
         }
@@ -59,7 +59,7 @@ public class RespawnListener implements Listener {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Config.ResistanceDuration, Config.ResistanceAmplitude));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, Config.ResistanceDuration, Config.ResistanceAmplitude));
                 }
             }.runTaskLater(Beaming.getInstance(), 10L);
 
