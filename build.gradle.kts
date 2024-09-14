@@ -16,15 +16,15 @@ repositories {
 
 dependencies {
     api("org.jetbrains:annotations-java5:24.1.0")
-    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
     compileOnly("net.countercraft:movecraft:+")
     compileOnly("net.essentialsx:EssentialsX:2.20.1")
 }
 
 group = "net.TylerS1066.Beaming"
-version = "2.0.0_beta-1_gradle"
+version = "2.0.0_beta-1_gradle+dev-1"
 description = "Beaming"
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 tasks.jar {
     archiveBaseName.set("Beaming")
@@ -70,7 +70,7 @@ hangarPublish {
         platforms {
             register(io.papermc.hangarpublishplugin.model.Platforms.PAPER) {
                 jar.set(tasks.jar.flatMap { it.archiveFile })
-                platformVersions.set(listOf("1.18.2-1.21"))
+                platformVersions.set(listOf("1.20.6-1.21.1"))
                 dependencies {
                     hangar("Movecraft") {
                         required.set(true)
