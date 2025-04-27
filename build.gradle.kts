@@ -22,7 +22,7 @@ dependencies {
 }
 
 group = "net.TylerS1066.Beaming"
-version = "2.0.0_beta-1_gradle+dev-1"
+version = "2.0.0_beta-2"
 description = "Beaming"
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
@@ -70,7 +70,7 @@ hangarPublish {
         platforms {
             register(io.papermc.hangarpublishplugin.model.Platforms.PAPER) {
                 jar.set(tasks.jar.flatMap { it.archiveFile })
-                platformVersions.set(listOf("1.20.6-1.21.1"))
+                platformVersions.set(listOf("1.20.6-1.21.4"))
                 dependencies {
                     hangar("Movecraft") {
                         required.set(true)
